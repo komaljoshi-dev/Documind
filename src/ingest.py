@@ -14,7 +14,7 @@ def extract_text(pdf_path):
 def main():
 
     data = extract_text("data/sample.pdf")
-    print(data)
+    print("Extracted characters:", len(data))
 
 if __name__ == "__main__":
     main()
