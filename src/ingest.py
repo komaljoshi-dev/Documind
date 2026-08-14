@@ -4,7 +4,7 @@ def extract_text(pdf_path):
 
     reader = PdfReader(pdf_path)
     text = ""
-    print(len(reader.pages))
+    NumberOfPages = len(reader.pages)
 
     for page in reader.pages:
         text += page.extract_text() or ""
