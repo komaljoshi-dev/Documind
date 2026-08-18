@@ -3,18 +3,22 @@ from pypdf import PdfReader
 def extract_text(pdf_path):
 
     reader = PdfReader(pdf_path)
-    text = ""
-    NumberOfPages = len(reader.pages)
+    pages = []
+    
+    for page_number, page in enumerate(reader.pages,start=1):
+        text = page.extract_text() or ""
 
-    for page in reader.pages:
-        text += page.extract_text() or ""
+        pages.append({
+            "page" : page_number,
+            "text" : text
+        })
 
-    return text
+    return pages
 
 def main():
 
-    data = extract_text("data/sample.pdf")
-    print("Extracted characters:", len(data))
+    pages = extract_text("data/sample.pdf")
+    print("first page :", pages[0]["text"][:200])
 
 if __name__ == "__main__":
     main()

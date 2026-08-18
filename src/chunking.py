@@ -1,15 +1,20 @@
-def create_chunks(text,chunk_size=150, overlap=30):
+def create_chunks(pages,chunk_size=150, overlap=30):
 
-    words = text.split()
     chunks = []
-    start = 0
+    for page in pages:
 
-    while start < len(words):
-        end = start + chunk_size
+        words = page["text"].split()
+        start = 0
 
-        chunk = " ".join(words[start : end])
-        chunks.append(chunk)
+        while start < len(words):
+            end = start + chunk_size
 
-        start += chunk_size-overlap
+            chunk = " ".join(words[start : end])
+            chunks.append({
+                "text": chunk,
+                "page": page["page"]
+            })
+
+            start += chunk_size-overlap
 
     return chunks 
