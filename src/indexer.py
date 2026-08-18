@@ -1,7 +1,7 @@
 import faiss
 from ingest import extract_text
 from chunking import create_chunks
-from embeddings import create_embeddings
+from embeddings import create_chunk_embeddings
 
 def build_index(embeddings):
   dimension = embeddings.shape[1]
@@ -12,7 +12,7 @@ def build_index(embeddings):
 def create_document_index(pdf_path):
   data = extract_text(pdf_path)
   chunks = create_chunks(data)
-  embeddings = create_embeddings(chunks)
+  embeddings = create_chunk_embeddings(chunks)
   index = build_index(embeddings)
 
   return index, chunks
