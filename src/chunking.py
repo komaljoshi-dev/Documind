@@ -1,4 +1,4 @@
-def create_chunks(pages,chunk_size=150, overlap=30):
+def create_chunks(pages,source,chunk_size=150, overlap=30):
 
     chunks = []
     for page in pages:
@@ -12,7 +12,8 @@ def create_chunks(pages,chunk_size=150, overlap=30):
             chunk = " ".join(words[start : end])
             chunks.append({
                 "text": chunk,
-                "page": page["page"]
+                "page": page["page"],
+                "source": source
             })
 
             start += chunk_size-overlap

@@ -17,8 +17,14 @@ def retrieve(query, index, chunks, k=3, threshold=1.5):
   return results
 
 def main():
-    index,chunks = create_document_index("data/sample.pdf")
-
+    pdf_paths = [
+       "data/sample.pdf",
+       "data/another.pdf"
+    ]
+    index,chunks = create_document_index(pdf_paths)
+    print("total chunks", len(chunks))
+    for chunk in chunks:
+      print(chunk["source"], chunk["page"])
     query = "How does the application manage global state?"
     results = retrieve(query, index, chunks)
 
@@ -32,10 +38,16 @@ def main():
       print("\n---Answer---")
       print(answer)
 
-      pages = sorted(set([result["chunk"]["page"] for result in results]))
+      sources = sorted(
+        set(
+          (result["chunk"]["source"] ,result["chunk"]["page"])
+          for result in results
+          )
+        )
 
       print("\nSources: ")
-      print(", ".join(f"Page {page}" for page in pages))
+      for source,page in sources:
+        print(f"{source} - Page {page}")
 
 if __name__ == "__main__":
   main()
