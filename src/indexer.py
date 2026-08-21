@@ -1,15 +1,15 @@
 import os
 import faiss
 
-from ingest import extract_text
-from chunking import create_chunks
-from embeddings import create_chunk_embeddings
+from .ingest import extract_text
+from .chunking import create_chunks
+from .embeddings import create_chunk_embeddings
 
 def build_index(embeddings):
   dimension = embeddings.shape[1]
   index = faiss.IndexFlatL2(dimension) #we told faiss we need an index which stores 384 dimensions
   index.add(embeddings)
-  
+
   return index
 
 def create_document_index(pdf_paths):
