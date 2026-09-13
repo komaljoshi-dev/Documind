@@ -1,6 +1,6 @@
 from .embeddings import create_query_embedding
 
-def retrieve(query, index, chunks, k=3, threshold=1.5):
+def retrieve(query, index, chunks, k=3, threshold=1.8):
   query_embedding = create_query_embedding(query)
   distances, indices = index.search(query_embedding, k)
 
