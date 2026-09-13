@@ -16,7 +16,7 @@ def process_documents(files):
 
     index,chunks = create_document_index(pdf_paths)
 
-    return f"Successfully processed {len(files)} PDF(s) and {len(chunks)} chunks.You can ask Questions now."
+    return f"Successfully processed {len(files)} PDF(s) and {len(chunks)} chunks. You can ask Questions now."
 
 
 def respond(query):
@@ -214,4 +214,4 @@ with gr.Blocks(
         outputs=[answer, sources],
     )
 
-demo.launch(share=True)
+demo.launch()
